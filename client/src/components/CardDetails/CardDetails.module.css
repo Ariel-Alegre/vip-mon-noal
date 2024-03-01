@@ -1,0 +1,120 @@
+.details_container {
+  margin-top: 2em;
+  background-color: black;
+  background-size: cover;
+}
+.sizes {
+  background-color: #ffc400;
+  color: black;
+}
+
+.sizes:hover {
+  cursor: pointer;
+  background-color: black;
+  color: #ffc400;
+}
+.sizes:focus {
+  background-color: black;
+  color: #ffc400;
+}
+.text {
+  color: #ffc400;
+}
+.text:hover {
+  color: #ffc400;
+}
+
+.btn_order {
+  background-color: #ffc400;
+}
+.img_Details {
+  background-color: white;
+  height: 480px;
+}
+
+.img_Details_medio {
+  height: 400px;
+  background-color: white;
+}
+.btn_order:hover {
+  background-color: #ffc400;
+}
+.btn_order:focus {
+  background-color: #ffc400;
+  box-shadow: 0px 0px 5px #ffc400;
+}
+
+.payment {
+  display: flex;
+  justify-content: center;
+  gap: 5em;
+  text-align: center;
+  margin-bottom: 5em;
+}
+
+.logo_payment img {
+  width: 300px;
+  height: 100px;
+}
+.logo_payment {
+  display: grid;
+  gap: 2em;
+}
+.logo_payment a {
+  color: #ffc400;
+}
+
+.correo {
+  width: 150px;
+}
+
+@media (max-width: 768px) {
+  .details_container {
+    background-color: black;
+    margin-top: 1em;
+  }
+  .contact_container {
+    background-color: black;
+    margin-top: 3em;
+    padding: 15px;
+  }
+  .image_container {
+    display: grid;
+    gap: 2em;
+  }
+  .contact {
+    color: #ffc400;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .payment {
+    display: grid;
+    justify-content: center;
+    gap: 5em;
+    text-align: center;
+  }
+
+  .logo_payment img {
+    width: 200px;
+    height: 100px;
+  }
+  .logo_payment {
+    display: grid;
+    gap: 2em;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .details_container {
+    margin-top: 2em;
+    background-color: black;
+  }
+
+  .logo_payment img {
+    width: 350px;
+    height: 150px;
+  }
+
+  
+}

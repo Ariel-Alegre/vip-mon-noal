@@ -1,0 +1,14 @@
+.list_card {
+    display: flex;
+    gap: 2em;
+}
+
+.list_img{
+width: 100px;
+}
+
+.buton_cart {
+    margin-top: 4em;
+    display: flex;
+    gap: 2em;
+}

@@ -1,0 +1,21 @@
+.imgContainer {
+   text-align: center;
+    color: '#fff';
+
+}
+
+.imgContainer h1  {
+    text-align: center;
+    color: '#fff';
+    
+}
+.text {
+    color: #ffc400;
+    font-size: 2em;
+}
+
+@media (max-width: 768px) {
+    .text {
+        font-size: 1em;
+    }
+}

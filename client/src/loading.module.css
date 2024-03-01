@@ -1,0 +1,7 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Añade esta línea para centrar verticalmente */
+  height: 100vh; /* Establece la altura al 100% del viewport height */
+  background-color: black;
+}

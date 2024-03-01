@@ -1,0 +1,17 @@
+
+.logo {
+  width: 230px;  
+  margin: auto;
+}
+
+.input {
+    background-color: black;
+    border:2px solid #ffc400;
+    outline: none;
+    height: 2.5em;
+    width: 100%;
+    color: white;
+}
+.input:focus {
+    background-color: black;
+}

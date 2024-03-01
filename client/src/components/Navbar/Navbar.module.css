@@ -1,0 +1,122 @@
+.card {
+    display: flex;
+    width: 100%;
+}
+
+.name_company {
+    font-size: 30px;
+    color: black;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.logo {
+    width: 10%;
+}
+
+.name_company_mobile {
+    font-size: 30px;
+    color: black;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.buton_cart {
+    margin-top: 4em;
+    display: flex;
+    gap: 2em;
+}
+.payment {
+    display: flex;
+    justify-content: center;
+    gap: 5em;
+    text-align: center;
+    margin-bottom: 5em;
+}
+
+.logo_payment img{
+  width: 300px;
+  height: 100px;
+
+}
+.logo_payment {
+    display: grid;
+    gap: 2em;
+}
+.logo_payment a{
+    color: #ffc400;
+}
+.cart_shopping {
+    display: none;
+}
+
+.total {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+.correo {
+    width: 150px;
+}
+
+@media (max-width: 768px) {
+    .cart_shopping {
+        display: grid;
+    }
+    .name_company_mobile{ 
+        display: flex;
+    }
+    .btn_login {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+    }
+    .details_container{
+        margin-top: 2em;
+       background-color: black;
+    }
+    .contact_container {
+        background-color: black;
+        margin-top: 3em;
+        padding: 15px;
+    }
+
+    .contact{
+        color: #ffc400;
+        font-size: 20px;
+        text-align: center; 
+    }
+
+    .payment {
+        display: grid;
+        justify-content: center;
+        gap: 5em;
+        text-align: center;
+    }
+    
+    .logo_payment img{
+      width: 200px;
+      height: 100px;
+    }
+    .logo_payment {
+        display: grid;
+        gap: 2em;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .details_container{
+        margin-top: 3em;
+       background-color: black;
+    }
+
+    .logo_payment img{
+      width: 350px;
+      height: 150px;
+    }
+ 
+}
