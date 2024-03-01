@@ -182,7 +182,7 @@ export default function CardDetails({ addToCart }) {
             <Image
               src={data}
               alt={data}
-              className="w-full object-cover object-center"
+              className={`w-full object-cover object-center ${styles.img_modal}`}
               />
           </div>
               ))}

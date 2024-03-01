@@ -308,7 +308,7 @@ const formattedTotal = total.toFixed(2);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ background: "#000" }}>
+      <AppBar component="nav" sx={{ background: "#000", zIndex: 1 }}>
         <Modal
           open={openCart}
           onClose={handleCloseCart}

@@ -67,7 +67,9 @@
 .correo {
   width: 150px;
 }
-
+.img_modal {
+  z-index: 9000;
+}
 @media (max-width: 768px) {
   .details_container {
     background-color: black;
