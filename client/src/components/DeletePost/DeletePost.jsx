@@ -125,7 +125,7 @@ const handleOpen = (productId) => {
     try {
       setLoading(true);
 
-      await dispatch(updateProduct(productDetails.id, data));
+     dispatch(updateProduct(productDetails.id, data));
       setLoading(false);
       success();
     } catch (error) {
@@ -212,6 +212,8 @@ const handleOpen = (productId) => {
                 Actualizar
               </Button>{" "}
               {/* Botón para eliminar un producto */}
+            </div>
+          ))}
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -337,8 +339,6 @@ const handleOpen = (productId) => {
                   </form>
                 </Box>
               </Modal>
-            </div>
-          ))}
         </div>
 
         <Pagination

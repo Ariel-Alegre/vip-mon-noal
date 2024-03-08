@@ -6,7 +6,7 @@ import axios from 'axios'
 
 
 
-export const register = (userData) => {
+ export const register = (userData) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('https://vipmon-production.up.railway.app/register', userData);
@@ -262,7 +262,6 @@ export const updateProduct= (productId, payload) => {
     }
   };
 }; 
-
 
 
 
