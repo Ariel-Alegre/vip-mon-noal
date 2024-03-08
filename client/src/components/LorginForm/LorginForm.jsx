@@ -36,7 +36,7 @@ export default function LoginForm() {
         setAuth(authResult);
         
       } else {
-        error()
+        error() 
       }
 
     } catch (error) {

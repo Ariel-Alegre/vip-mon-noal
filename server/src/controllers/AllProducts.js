@@ -4,7 +4,10 @@ module.exports = {
   AllProducts: async (req, res) => {
     try {
   
-        const products = await Products.findAll();
+        const products = await Products.findAll({
+        order: [['createdAt', 'ASC']], // 'ASC' para obtener en orden ascendente (por fecha de creación)
+
+        });
         if (products.length > 0) {
           res.status(200).send(products);
         } else {

@@ -6,7 +6,6 @@ import axios from 'axios'
 
 
 
-
 export const register = (userData) => {
   return async (dispatch) => {
     try {
@@ -249,13 +248,30 @@ export const deleteOrder= (orderId) => {
 }; 
 
 
+export const updateProduct= (productId, payload) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`https://vipmon-production.up.railway.app/productupdate/${productId}`, payload);
+      const data = res.data;
+      dispatch({
+        type: "UPDATE_PRODUCT",
+        payload: data
+      });
+    } catch (error) {
+      console.error('Error al actualizar publicación:', error);
+    }
+  };
+}; 
 
 
 
 
 
-/* 
-export const register = (userData) => {
+
+
+
+
+/* export const register = (userData) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('http://localhost:3001/register', userData);
@@ -494,4 +510,20 @@ export const deleteOrder= (orderId) => {
       console.error('Error al borrar la orden:', error);
     }
   };
-}; */
+}; 
+
+
+export const updateProduct= (productId, payload) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`http://localhost:3001/productupdate/${productId}`, payload);
+      const data = res.data;
+      dispatch({
+        type: "UPDATE_PRODUCT",
+        payload: data
+      });
+    } catch (error) {
+      console.error('Error al actualizar publicación:', error);
+    }
+  };
+};   */

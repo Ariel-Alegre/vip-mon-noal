@@ -114,7 +114,7 @@ function AdminComplete(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            VIP MON NOAL
           </Typography>
         </Toolbar>
       </AppBar>

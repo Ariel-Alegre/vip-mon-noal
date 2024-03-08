@@ -11,6 +11,7 @@ const {Order} = require('../controllers/Order');
 const {AllOrder} = require('../controllers/AllOrder');
 const {detailsOrder} = require('../controllers/detailsOrder');
 const {DeleteOrder} = require('../controllers/DeleteOrder');
+const {UpdateProduct} = require('../controllers/UpdateProduct');
 
 
 
@@ -45,6 +46,8 @@ router.get('/orders', AllOrder);
 router.get('/order/:orderId', detailsOrder);
 router.delete('/delete/:productId', DeletePost);
 router.delete('/order/delete/:orderId', DeleteOrder);
+router.put('/productupdate/:productId', UpdateProduct);
+
 
 
 

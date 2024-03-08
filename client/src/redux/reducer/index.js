@@ -114,9 +114,15 @@ export const rootReducer = (state = initialState, action) => {
               allCart: action.payload
             };
 
+            case 'UPDATE_PRODUCT':
+            return {
+              ...state,
+           
+            };
+
         
           
-      
+            
 
 
     default: return { ...state }
