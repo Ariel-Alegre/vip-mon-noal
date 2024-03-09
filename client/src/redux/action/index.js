@@ -9,7 +9,7 @@ import axios from 'axios'
  export const register = (userData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('https://vipmon-production.up.railway.app/register', userData);
+      const response = await axios.post('https://vip-mon-noal-production.up.railway.app/register', userData);
 
       // Aquí podrías despachar una acción indicando que el registro fue exitoso
       dispatch({ type: 'REGISTER_SUCCESS', payload: response.data });
@@ -30,7 +30,7 @@ import axios from 'axios'
 export const login = (email, password) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("https://vipmon-production.up.railway.app/login", {
+      const response = await axios.post("https://vip-mon-noal-production.up.railway.app/login", {
         email,
         password,
       });
@@ -71,7 +71,7 @@ export const dataPersonal = (token) => {
   return async (dispatch) => {
     try {
       const res = await axios.get(
-        "https://vipmon-production.up.railway.app/datapersonal",
+        "https://vip-mon-noal-production.up.railway.app/datapersonal",
         {
           method: "GET",
           headers: {
@@ -94,7 +94,7 @@ export const dataPersonal = (token) => {
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post('https://vipmon-production.up.railway.app/post', payload);
+      const res = await axios.post('https://vip-mon-noal-production.up.railway.app/post', payload);
       const data = res.data;
 
       dispatch({
@@ -110,7 +110,7 @@ export const postProduct = (payload) => {
 export const deleteProduct= (productId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.delete(`https://vipmon-production.up.railway.app/delete/${productId}`);
+      const res = await axios.delete(`https://vip-mon-noal-production.up.railway.app/delete/${productId}`);
       const data = res.data;
       dispatch({
         type: "DELETE_PRODUCT",
@@ -125,7 +125,7 @@ export const deleteProduct= (productId) => {
 export const AllProducts = (payload) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get('https://vipmon-production.up.railway.app/products', payload);
+      const res = await axios.get('https://vip-mon-noal-production.up.railway.app/products', payload);
       const data = res.data;
 
       dispatch({
@@ -141,7 +141,7 @@ export const AllProducts = (payload) => {
 export const AllUsers= (payload) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get('https://vipmon-production.up.railway.app/users', payload);
+      const res = await axios.get('https://vip-mon-noal-production.up.railway.app/users', payload);
       const data = res.data;
 
       dispatch({
@@ -159,7 +159,7 @@ export const AllUsers= (payload) => {
 export const ProductDetail= (productId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`https://vipmon-production.up.railway.app/product/${productId}`);
+      const res = await axios.get(`https://vip-mon-noal-production.up.railway.app/product/${productId}`);
       const data = res.data;
 
       dispatch({
@@ -175,7 +175,7 @@ export const ProductDetail= (productId) => {
 export const PaymentPaypal= (productId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`https://vipmon-production.up.railway.app/create-payment/${productId}`);
+      const res = await axios.post(`https://vip-mon-noal-production.up.railway.app/create-payment/${productId}`);
       const data = res.data;
 window.location.href = data.links[1].href
       dispatch({
@@ -191,7 +191,7 @@ window.location.href = data.links[1].href
 export const Order= (payload) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`https://vipmon-production.up.railway.app/order`, payload);
+      const res = await axios.post(`https://vip-mon-noal-production.up.railway.app/order`, payload);
       const data = res.data;
       dispatch({
         type: "ORDER",
@@ -206,7 +206,7 @@ export const Order= (payload) => {
 export const AllOrder= () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`https://vipmon-production.up.railway.app/orders`);
+      const res = await axios.get(`https://vip-mon-noal-production.up.railway.app/orders`);
       const data = res.data;
       dispatch({
         type: "ALL_ORDER",
@@ -221,7 +221,7 @@ export const AllOrder= () => {
 export const OneOrder= (orderId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`https://vipmon-production.up.railway.app/order/${orderId}`);
+      const res = await axios.get(`https://vip-mon-noal-production.up.railway.app/order/${orderId}`);
       const data = res.data;
       dispatch({
         type: "DETAILS_ORDER",
@@ -235,7 +235,7 @@ export const OneOrder= (orderId) => {
 export const deleteOrder= (orderId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.delete(`https://vipmon-production.up.railway.app/order/delete/${orderId}`);
+      const res = await axios.delete(`https://vip-mon-noal-production.up.railway.app/order/delete/${orderId}`);
       const data = res.data;
       dispatch({
         type: "DELETE_ORDER",
@@ -251,7 +251,8 @@ export const deleteOrder= (orderId) => {
 export const updateProduct= (productId, payload) => {
   return async (dispatch) => {
     try {
-      const res = await axios.put(`https://vipmon-production.up.railway.app/productupdate/${productId}`, payload);
+      const res = await axios.put(`https://vip-mon-noal-production.up.railway.app/productupdate/${productId}`, payload);
+
       const data = res.data;
       dispatch({
         type: "UPDATE_PRODUCT",
