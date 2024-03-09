@@ -121,16 +121,22 @@ const handleOpen = (productId) => {
     });
   };
 
-  const handleUpdateSubmit = async () => {
+  const handleUpdateSubmit = async (e) => {
+    e.preventDefault();
     try {
       setLoading(true);
 
      dispatch(updateProduct(productDetails.id, data));
-      setLoading(false);
-      success();
     } catch (error) {
       console.error("Error al crear actualización:", error);
       // Manejo de error, muestra un mensaje de error, etc.
+    }finally {
+      setLoading(false);
+      success();
+
+      setTimeout(async () => {
+        window.location.reload()
+      }, 1000);
     }
   };
 
