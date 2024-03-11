@@ -51,8 +51,8 @@ window.location.reload()
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Teléfono</th>
-                <th>talle</th>
-                <th>talle</th>
+                <th>Talle</th>
+                <th>Precio total</th>
 
                 <th>-</th>
 
