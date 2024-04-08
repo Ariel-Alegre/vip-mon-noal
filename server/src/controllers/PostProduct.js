@@ -51,7 +51,7 @@ module.exports = {
 
       const uploadedImageUrls = await Promise.all(uploadPromises);
         
-      const { product, details, price, price_send,  category, size,descount, backgroundColor } = req.body;
+      const { product, details, price, price_send,  category, subcategory, size,descount, backgroundColor } = req.body;
       const parsedSize= typeof size === 'string' ? JSON.parse(size) : [];
 
       const newPost = await Products.create({
@@ -62,6 +62,7 @@ module.exports = {
         price,
         price_send,
         category,
+        subcategory,
         size: parsedSize,
         backgroundColor
       });

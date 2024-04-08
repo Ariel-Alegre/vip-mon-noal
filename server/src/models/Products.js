@@ -26,6 +26,9 @@ module.exports = (sequelize) => {
     category: {
       type: DataTypes.STRING,
     },
+    subcategory: {
+      type: DataTypes.STRING,
+    },
     size: {
       type: DataTypes.ARRAY(DataTypes.STRING)
     },

@@ -15,7 +15,6 @@ export default function OrderProducts() {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [generationSearchTerm, setGenerationSearchTerm] = React.useState("");
  const allOrders = useSelector(state => state.allOrders);
-console.log(allOrders);
   React.useEffect(() => {
     dispatch(AllOrder());
   }, [dispatch]);

@@ -31,7 +31,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { ProductDetail, Order, PaymentPaypal } from "../../redux/action";
 import { useParams } from "react-router-dom";
 
-
 const product = {
   name: "Basic Tee 6-Pack",
   price: "$192",
@@ -101,7 +100,6 @@ const style = {
   },
 };
 
-
 const styleOrder = {
   position: "absolute",
   top: "50%",
@@ -138,7 +136,6 @@ function DrawerAppBar({ cartItems, removeFromCart }) {
   };
 
   const sizes = cartItems ? cartItems.map((item) => item.size || []) : [];
-
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
@@ -209,8 +206,7 @@ function DrawerAppBar({ cartItems, removeFromCart }) {
   );
 
   const container = window !== undefined ? window.document.body : undefined;
-  
-  
+
   const [selectedSize, setSelectedSize] = React.useState(product.sizes[2]);
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -220,7 +216,7 @@ function DrawerAppBar({ cartItems, removeFromCart }) {
     product: "",
     price_total: "",
 
-    size:[],
+    size: [],
     name: "",
     lastName: "",
     email: "",
@@ -234,31 +230,31 @@ function DrawerAppBar({ cartItems, removeFromCart }) {
   });
   const [openOrder, setOpenOrder] = React.useState(false);
   const handleOpenOrder = () => {
-    setOpenCart(false)
+    setOpenCart(false);
     setOpenOrder(true);
     setOrder((prevOrder) => ({
       ...prevOrder,
       product: productDetails.product,
       product_id: productDetails.id,
-      price_total: total ,
-      size:sizes,
+      price_total: total,
+      size: sizes,
     }));
   };
-  const handleCloseOrder  = ()  =>{
-     setOpenOrder(false)
+  const handleCloseOrder = () => {
+    setOpenOrder(false);
   };
 
   const total = cartItems
-  ? cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0) + (productDetails.price_send ? parseFloat(productDetails.price_send) : 0)
-  : 0;
+    ? cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0) +
+      (productDetails.price_send ? parseFloat(productDetails.price_send) : 0)
+    : 0;
 
-const formattedTotal = total.toFixed(2);
-
+  const formattedTotal = total.toFixed(2);
 
   React.useEffect(() => {
     dispatch(ProductDetail(productId));
   }, [dispatch, productId]);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Activa el indicador de carga
@@ -281,11 +277,9 @@ const formattedTotal = total.toFixed(2);
 
       product: productDetails.product, // Agregar el nombre del producto
       product_id: productDetails.id,
-      price_total: total ,
-
+      price_total: total,
     });
   };
-
 
   const handleSize = (size) => {
     setSelectedSize((prevSizes) => {
@@ -303,7 +297,6 @@ const formattedTotal = total.toFixed(2);
       size: [size],
     }));
   };
- 
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -318,19 +311,30 @@ const formattedTotal = total.toFixed(2);
           <Box sx={style}>
             <h2>Carrito de Compras</h2>
             <ul>
-            {cartItems && cartItems.map((item, index) => (
-  <CartItem key={index} item={item} index={index} removeFromCart={removeFromCart} />
-))}
-
+              {cartItems &&
+                cartItems.map((item, index) => (
+                  <CartItem
+                    key={index}
+                    item={item}
+                    index={index}
+                    removeFromCart={removeFromCart}
+                  />
+                ))}
             </ul>
             <div className={styles.total}>
+              <strong>Precio total: €{formattedTotal}</strong>
+            </div>
+            <div>
               <strong>
-              Precio total: €{formattedTotal}
+                + €{productDetails.price_send} costo de envió a través de
+                correos{" "}
+                <img
+                  className={styles.correo}
+                  src={require("../../Images/Icono-payment/Correos-envio.jpg")}
+                  alt=""
+                />{" "}
               </strong>
-              </div>
-            <div><strong>+ €{productDetails.price_send} costo de envió a través de correos <img className={styles.correo} src={require('../../Images/Icono-payment/Correos-envio.jpg')} alt="" /> </strong></div>
-
-
+            </div>
 
             <div className={styles.buton_cart}>
               <Button
@@ -359,359 +363,364 @@ const formattedTotal = total.toFixed(2);
           </Box>
         </Modal>
 
-
-
         <Modal
-        onClose={handleCloseOrder}
-        open={openOrder}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={styleOrder}>
-          <form onSubmit={handleSubmit}>
-            <div className="space-y-12">
-              <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-base font-semibold leading-7 text-gray-900">
-                  Completa la compra
+          onClose={handleCloseOrder}
+          open={openOrder}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={styleOrder}>
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-12">
+                <div className="border-b border-gray-900/10 pb-12">
+                  <h2 className="text-base font-semibold leading-7 text-gray-900">
+                    Completa la compra
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-gray-600">
+                    Llene los datos para completar la compra.
+                  </p>
+
+                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="product"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Producto
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="product"
+                          id="product"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={productDetails.product || order.product}
+                          required
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="product_id"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        id
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="product_id"
+                          id="product_id"
+                          autoComplete="given-name"
+                          value={productDetails.id || order.product_id}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          disabled
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Talla
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="size"
+                          id="size"
+                          autoComplete="family-name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.size}
+                          disabled
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Nombre
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          autoComplete="given-name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.name}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Apellido
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="lastName"
+                          id="lastName"
+                          autoComplete="family-name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.lastName}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Correo electrónico
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          autoComplete="given-name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.email}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Telefóno
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="phone"
+                          id="phone"
+                          autoComplete="family-name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.phone}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Dirección
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="direction_1"
+                          id="direction_1"
+                          autoComplete="given-name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.direction_1}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Dirección (opcional)
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="direction_2"
+                          id="direction_2"
+                          autoComplete="family-name"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.direction_2}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2 sm:col-start-1">
+                      <label
+                        htmlFor="city"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Ciudad
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="city"
+                          id="city"
+                          autoComplete="address-level2"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.city}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="postal_code"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Codigo postal
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="postal_code"
+                          id="postal_code"
+                          autoComplete="postal_code"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={handleChange}
+                          value={order.postal_code}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="price"
+                        className="block text-sm font-semibold leading-6 text-gray-900"
+                      >
+                        Precio total
+                      </label>
+                      <div className="relative mt-2 rounded-md shadow-sm">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                          <span className="text-gray-500 sm:text-sm">€</span>
+                        </div>
+                        <input
+                          type="number"
+                          name="price_total"
+                          id="price_total"
+                          className="block w-full rounded-md border-0 py-1.5 pl-7 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          placeholder="0.00"
+                          onChange={handleChange}
+                          value={
+                            typeof order.price_total === "number"
+                              ? order.price_total.toFixed(2)
+                              : ""
+                          }
+                          disabled
+                        />
+                      </div>
+                      <div>
+                        <strong>
+                          + €{productDetails.price_send} costo de envió a través
+                          de correos{" "}
+                          <img
+                            className={styles.correo}
+                            src={require("../../Images/Icono-payment/Correos-envio.jpg")}
+                            alt=""
+                          />{" "}
+                        </strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-10">
+                <h2 className={`text-sm font-medium text-gray-900 `}>
+                  METODOS DE PAGO
                 </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Llene los datos para completar la compra.
-                </p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="product"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Producto
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="product"
-                        id="product"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={productDetails.product || order.product}
-                        required
-                    disabled
-
-                      />
+                <div className="mt-4 space-y-6">
+                  <p className={`text-sm text-gray-600 `}>
+                    {" "}
+                    Una vez completado el formulario, primero realize la
+                    transferencia y luego el boton de completar compra.
+                  </p>
+                  <div className={styles.payment}>
+                    <div className={styles.logo_payment}>
+                      <a
+                        href="https://www.paypal.com/paypalme/VipMonNoal"
+                        target="__blanck"
+                      >
+                        <img
+                          src={require("../../Images/Icono-payment/Paypal.png")}
+                          alt=""
+                        />
+                      </a>
                     </div>
-                  </div>
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="product_id"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      id
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="product_id"
-                        id="product_id"
-                        autoComplete="given-name"
-                        value={productDetails.id || order.product_id}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        disabled
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Talla
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="size"
-                        id="size"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.size}
-                        disabled
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Nombre
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.name}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Apellido
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.lastName}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Correo electrónico
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.email}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Telefóno
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="phone"
-                        id="phone"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.phone}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Dirección
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="direction_1"
-                        id="direction_1"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.direction_1}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Dirección (opcional)
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="direction_2"
-                        id="direction_2"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.direction_2}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2 sm:col-start-1">
-                    <label
-                      htmlFor="city"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Ciudad
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.city}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="postal_code"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Codigo postal
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="postal_code"
-                        id="postal_code"
-                        autoComplete="postal_code"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        onChange={handleChange}
-                        value={order.postal_code}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                <label
-                  htmlFor="price"
-                  className="block text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Precio total
-                </label>
-                <div className="relative mt-2 rounded-md shadow-sm">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <span className="text-gray-500 sm:text-sm">€</span>
-                  </div>
-                  <input
-  type="number"
-  name="price_total"
-  id="price_total"
-  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-  placeholder="0.00"
-  onChange={handleChange}
-  value={typeof order.price_total === 'number' ? order.price_total.toFixed(2) : ''}
-  disabled
-/>
-
-
-
-                </div>
-                <div><strong>+ €{productDetails.price_send} costo de envió a través de correos <img className={styles.correo} src={require('../../Images/Icono-payment/Correos-envio.jpg')} alt="" /> </strong></div>
-
-
-
-              </div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-10">
-              <h2 className={`text-sm font-medium text-gray-900 `}>
-                METODOS DE PAGO
-              </h2>
-
-              <div className="mt-4 space-y-6">
-                <p className={`text-sm text-gray-600 `}>
-                  {" "}
-                  Una vez completado el formulario, primero realize la
-                  transferencia y luego el boton de completar compra.
-                </p>
-                <div className={styles.payment}>
-                  <div className={styles.logo_payment}>
-                    <a
-                      href="https://www.paypal.com/paypalme/VipMonNoal"
-                      target="__blanck"
-                    >
+                    <div className={styles.logo_payment}>
                       <img
-                        src={require("../../Images/Icono-payment/Paypal.png")}
+                        src={require("../../Images/Icono-payment/Bizum1.png")}
                         alt=""
                       />
-                    </a>
-                  </div>
-                  <div className={styles.logo_payment}>
-                    <img
-                      src={require("../../Images/Icono-payment/Bizum1.png")}
-                      alt=""
-                    />
-                    <a>+34 670 862 817</a>
-                  </div>
+                      <a>+34 670 862 817</a>
+                    </div>
 
-                  <div className={styles.logo_payment}>
-                    <img
-                      src={require("../../Images/Icono-payment/caja.png")}
-                      alt=""
-                    />
-                    <a>ES3821030157090010025387</a>
+                    <div className={styles.logo_payment}>
+                      <img
+                        src={require("../../Images/Icono-payment/caja.png")}
+                        alt=""
+                      />
+                      <a>ES3821030157090010025387</a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-              <Button
-                onClick={handleCloseOrder}
-                type="button"
-                variant="contained"
-                sx={{
-                  backgroundColor: "red",
-                  ":hover": { backgroundColor: "red" },
-                }}
-              >
-                Cancelar
-              </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{
-                  backgroundColor: "#ffc400",
-                  ":hover": { backgroundColor: "#ffc400" },
-                }}
-              >
-                {loading ? (
-                  <CircularProgress size={24} color="inherit" />
-                ) : (
-                  "Completar la compra"
-                )}
-              </Button>
-            </div>
-          </form>
-        </Box>
-      </Modal>
+              <div className="mt-6 flex items-center justify-end gap-x-6">
+                <Button
+                  onClick={handleCloseOrder}
+                  type="button"
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "red",
+                    ":hover": { backgroundColor: "red" },
+                  }}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#ffc400",
+                    ":hover": { backgroundColor: "#ffc400" },
+                  }}
+                >
+                  {loading ? (
+                    <CircularProgress size={24} color="inherit" />
+                  ) : (
+                    "Completar la compra"
+                  )}
+                </Button>
+              </div>
+            </form>
+          </Box>
+        </Modal>
 
         <Toolbar>
           <IconButton
@@ -737,14 +746,14 @@ const formattedTotal = total.toFixed(2);
             </Link>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-          <IconButton aria-label="cart" onClick={handleOpenCart}>
-            <StyledBadge
-              badgeContent={cartItems ? cartItems.length : 0}
-              color="secondary"
-            >
-              <ShoppingCartIcon sx={{ color: "#ffc400" }} />
-            </StyledBadge>
-          </IconButton>
+            <IconButton aria-label="cart" onClick={handleOpenCart}>
+              <StyledBadge
+                badgeContent={cartItems ? cartItems.length : 0}
+                color="secondary"
+              >
+                <ShoppingCartIcon sx={{ color: "#ffc400" }} />
+              </StyledBadge>
+            </IconButton>
             <Link to="/">
               <Button sx={{ color: "#ffc400" }}>Inicio</Button>
             </Link>
@@ -756,16 +765,15 @@ const formattedTotal = total.toFixed(2);
             </Link>
           </Box>
           <div className={styles.cart_shopping}>
-
-          <IconButton  aria-label="cart" onClick={handleOpenCart}>
-            <StyledBadge
-              badgeContent={cartItems ? cartItems.length : 0}
-              color="secondary"
+            <IconButton aria-label="cart" onClick={handleOpenCart}>
+              <StyledBadge
+                badgeContent={cartItems ? cartItems.length : 0}
+                color="secondary"
               >
-              <ShoppingCartIcon sx={{ color: "#ffc400" }} />
-            </StyledBadge>
-          </IconButton>
-              </div>
+                <ShoppingCartIcon sx={{ color: "#ffc400" }} />
+              </StyledBadge>
+            </IconButton>
+          </div>
           {datapersonal && datapersonal.role === "user" ? (
             <div className={styles.btn_login}>
               <Avatar
@@ -807,8 +815,6 @@ const formattedTotal = total.toFixed(2);
               </Link>
             </div>
           )}
-
-       
         </Toolbar>
       </AppBar>
       <nav>

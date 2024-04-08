@@ -18,6 +18,7 @@ export default function PostProducts() {
     imageFile: [],
     size: [],
     category: "",
+    subcategory: "",
     backgroundColor: "",
     details: "",
   });
@@ -37,6 +38,8 @@ export default function PostProducts() {
       formData.append("price_send", data.price_send);
 
       formData.append("category", data.category);
+      formData.append("subcategory", data.subcategory);
+
       formData.append("backgroundColor", data.backgroundColor);
       formData.append("details", data.details);
       
@@ -57,6 +60,7 @@ export default function PostProducts() {
         imageFile: [],
         size: [],
         category: "",
+        subcategory: "",
         backgroundColor: "",
         details: "",
       });
@@ -209,6 +213,31 @@ export default function PostProducts() {
                   </select>
                 </div>
               </div>
+
+
+              <div>
+                <label
+                  htmlFor="subcategory"
+                  className="block text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Sub categoria
+                </label>
+                <div className="mt-2.5">
+                  <input
+                    type="text"
+                    name="subcategory"
+                    id="subcategory"
+                    onChange={(e) =>
+                      setData({ ...data, subcategory: e.target.value })
+                    }
+                    value={data.subcategory}
+                    className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+
+                    required
+                 />
+                </div>
+              </div>
+
               <div>
                 <label
                   htmlFor="price"
@@ -283,6 +312,9 @@ export default function PostProducts() {
       <option value="L">L</option>
       <option value="XL">XL</option>
       <option value="XXL">XXL</option>
+      <option value="3XL">3XL</option>
+
+      
     </select>
   </div>
   {data.size.length > 0 && (

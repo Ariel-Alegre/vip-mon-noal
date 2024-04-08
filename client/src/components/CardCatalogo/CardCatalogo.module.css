@@ -38,7 +38,20 @@ margin-bottom: 2em;
     background-color: black;
     color: #ffc400;
 }
+.data_complete {
+    display: flex;
+}
+.ul_container {
 
+    display: grid;
+    position: absolute;
+     left: 0;
+}
+
+.ul_container ul {
+    color: #ffc400;
+ 
+}
 
 .img_photo {
     height: auto;
@@ -55,11 +68,23 @@ margin-bottom: 2em;
     padding: 15px;
     
 }
+
+.subcategory_mobile {
+    display: none;
+}
 @media only screen and (max-width: 768px) {
     .text_destacado {
         font-size: 2em;
     }
     .select_category {
         width: 100%;
+        }
+
+        .subcategory_mobile {
+            display: grid;
+        }
+
+        .ul_container {
+            display: none;
         }
   }
