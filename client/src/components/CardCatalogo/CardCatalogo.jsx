@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./CardCatalogo.module.css";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
@@ -36,13 +36,6 @@ export default function CardCatalogo() {
     return new Date(a.createdAt) - new Date(b.createdAt);
   });
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = sortedProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
   // Obtener todas las categorías y subcategorías únicas de los productos
   const categories = [...new Set(allProducts.map((product) => product.category))];
   const subcategories = selectedCategory
@@ -50,26 +43,33 @@ export default function CardCatalogo() {
     : [];
 
   // Filtrar los productos por categoría y subcategoría seleccionadas
-const filteredProducts = currentProducts.filter((product) => {
-  if (selectedCategory && (selectedSubcategories.length > 0 || selectedSubcategory)) {
-    if (selectedSubcategories.length > 0) {
-      return (
-        product.category === selectedCategory &&
-        selectedSubcategories.includes(product.subcategory)
-      );
+  const filteredProducts = sortedProducts.filter((product) => {
+    if (selectedCategory && (selectedSubcategories.length > 0 || selectedSubcategory)) {
+      if (selectedSubcategories.length > 0) {
+        return (
+          product.category === selectedCategory &&
+          selectedSubcategories.includes(product.subcategory)
+        );
+      } else {
+        return (
+          product.category === selectedCategory &&
+          product.subcategory === selectedSubcategory
+        );
+      }
+    } else if (selectedCategory) {
+      return product.category === selectedCategory;
     } else {
-      return (
-        product.category === selectedCategory &&
-        product.subcategory === selectedSubcategory
-      );
+      return true;
     }
-  } else if (selectedCategory) {
-    return product.category === selectedCategory;
-  } else {
-    return true;
-  }
-});
+  });
 
+  // Obtener los productos para la página actual
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const handlePageChange = (_, page) => {
     setCurrentPage(page);
@@ -97,7 +97,6 @@ const filteredProducts = currentProducts.filter((product) => {
               onChange={(e) => setSelectedCategory(e.target.value)}
               value={selectedCategory}
             >
-               
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category}
@@ -146,7 +145,7 @@ const filteredProducts = currentProducts.filter((product) => {
           <div
             className={`mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ${styles.card}`}
           >
-            {filteredProducts.map((product) => (
+            {currentProducts.map((product) => (
               <div key={product.id}>
                 <Link
                   to={`/detalles/${product.id}?page=${currentPage}`}
@@ -190,6 +189,8 @@ const filteredProducts = currentProducts.filter((product) => {
               style={{ color: "#ffc400", fontSize: "20px" }}
             />
           )}
+       
+
         />
       </div>
     </div>
