@@ -126,22 +126,24 @@ export default function CardCatalogo() {
         </h2>
         <div className={styles.data_complete}>
           
-          <div className={styles.ul_container}>
-            {subcategories.map((subcategory) => (
-              <ul key={subcategory}>
-                <li>
-                  {subcategory}{" "}
-                  <input
-                    type="checkbox"
-                    name="subcategories"
-                    value={subcategory}
-                    checked={selectedSubcategories.includes(subcategory)}
-                    onChange={() => handleCheckboxChange(subcategory)}
-                  />
-                </li>
-              </ul>
-            ))}
-          </div>
+        <div className={styles.ul_container}>
+  {[...new Set(subcategories)].map((subcategory) => (
+    <ul key={subcategory}>
+      <li>
+        {subcategory}{" "}
+        <input
+          type="checkbox"
+          name="subcategories"
+          value={subcategory}
+          checked={selectedSubcategories.includes(subcategory)}
+          onChange={() => handleCheckboxChange(subcategory)}
+        />
+      </li>
+    </ul>
+  ))}
+</div>
+
+
           <div
             className={`mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ${styles.card}`}
           >
