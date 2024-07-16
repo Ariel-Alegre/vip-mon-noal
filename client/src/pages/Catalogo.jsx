@@ -60,7 +60,7 @@ export default function Catalogo() {
       ) : (
             <div>
 
-          {/*   <CardCatalogo/> */}
+          <CardCatalogo/> 
 
             <Footer/>
   <ButtonWhatsapp/>
