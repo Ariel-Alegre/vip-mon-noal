@@ -32,14 +32,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        {role && role === 'admin' ? (
+      
           <Route path='/admin' element={<Admin/>}>
             <Route index element={<PostProducts/>}/>
             <Route path='publicar' element={<PostProducts/>}/>
             <Route path='pedidos' element={<Order/>}/>
             <Route path='publicaciones' element={<DeletePostPage/>}/>
           </Route>
-        ) : null}
+      
         <Route path='orden/:orderId' element={<OneOrder/>}/>
 
         <Route path='/' element={<Home/>}/>
