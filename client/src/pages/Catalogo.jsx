@@ -20,8 +20,7 @@ const loadCartFromLocalStorage = () => {
 export default function Catalogo() {
     const [loading, setLoading] = useState(true);
     const [cartItems, setCartItems] = useState([]);
-    const [productDetails, setProductDetails] = useState({});
-    const [selectedSize, setSelectedSize] = useState("");
+ 
   
     // Cargar datos del carrito desde localStorage al montar el componente
     useEffect(() => {
@@ -29,14 +28,7 @@ export default function Catalogo() {
       setCartItems(savedCartItems);
     }, []);
   
-    // Función para agregar un elemento al carrito
-    const addToCart = (product) => {
-      const newCartItems = [...cartItems, product];
-      setCartItems(newCartItems);
-      saveCartToLocalStorage(newCartItems);
-    };
-  
-    // Función para eliminar un elemento del carrito
+ 
     const removeFromCart = (index) => {
       const newCartItems = cartItems.filter((item, i) => i !== index);
       setCartItems(newCartItems);
